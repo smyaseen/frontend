@@ -34,5 +34,4 @@ if [[ ! $commit_message =~ $pattern ]]; then
 fi
 
 npx lint-staged
-# npm run test 
-
+npm run test
