@@ -34,7 +34,5 @@ if [[ ! $commit_message =~ $pattern ]]; then
 fi
 
 npx lint-staged
-# Uncomment below line when tests are added
 # npm run test 
-npm run build
 
