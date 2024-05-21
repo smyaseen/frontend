@@ -35,3 +35,4 @@ fi
 
 npx lint-staged
 npm run test
+npm run coverage

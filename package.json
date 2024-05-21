@@ -9,7 +9,8 @@
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
     "prepare": "husky install",
-    "test": "jest  --passWithNoTests"
+    "test": "jest  --passWithNoTests",
+    "coverage": "npm test --coverage --watchAll --collectCoverageFrom='src/components/**/*.{ts,tsx}'"
   },
   "lint-staged": {
     "*.{ts,tsx}": [
