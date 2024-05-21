@@ -1,42 +1,13 @@
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+.login-button {
+  background: linear-gradient(90deg, #0198f7 0%, #7fc2fb);
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+.login-button:hover {
+  background: linear-gradient(180deg, rgba(54, 62, 78, 0.2), rgba(54, 62, 78, 0.2)),
+    linear-gradient(90deg, #0198f7 0%, #7fc2fb);
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
+.login-button:active {
+  background: linear-gradient(180deg, rgba(54, 62, 78, 0.1), rgba(54, 62, 78, 0.1)),
+    linear-gradient(90deg, #0198f7 0%, #7fc2fb);
 }

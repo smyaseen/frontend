@@ -1,52 +1,89 @@
 import './App.css';
-import { Button } from '@nextui-org/react';
-import { useState } from 'react';
-import viteLogo from '/vite.svg';
-import reactLogo from './assets/react.svg';
+import { Button, Checkbox, Image, Input, Link } from '@nextui-org/react';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <div>
-        <a
-          href="https://vitejs.dev"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src={viteLogo}
-            className="logo"
-            alt="Vite logo"
-          />
-        </a>
-        <a
-          href="https://react.dev"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <img
-            src={reactLogo}
-            className="logo react"
-            alt="React logo"
-          />
-        </a>
+    <div className="flex flex-col items-center justify-center gap-16 px-4 pb-0 pt-10">
+      <div className="flex w-full flex-row justify-between">
+        <Image
+          src="/logo.svg"
+          alt="NextUI"
+          className="hidden sm:block"
+        />
+        <Image
+          src="/logo-sm.svg"
+          alt="NextUI"
+          className="block sm:hidden"
+        />
+        <div className="flex flex-row items-center gap-4">
+          <p className="hidden text-sm text-[#848fa3] sm:block">Don’t have an account?</p>
+          <Button
+            variant="bordered"
+            radius="full"
+            className="h-[2.6rem] w-[9.5rem] border-1 border-[#eaedf1] font-medium text-[#363e4e]"
+          >
+            Sign up
+          </Button>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
+
+      <div className="flex w-full max-w-96 flex-col justify-center gap-8">
+        <p className="text-center text-[2rem] text-lg font-semibold">Welcome Back</p>
+
+        <div className="flex flex-col gap-4">
+          <Input
+            variant="underlined"
+            label="Business Email"
+            // placeholder="name@yourcompany.com"
+            type="email"
+          />
+
+          <Input
+            variant="underlined"
+            label="Password"
+            type="password"
+          />
+        </div>
+
+        <div className="flex flex-row justify-between">
+          <Checkbox
+            radius="none"
+            defaultSelected
+            size="sm"
+          >
+            Keep me logged in
+          </Checkbox>
+
+          <Link
+            underline="hover"
+            className="cursor-pointer text-sm"
+          >
+            Forgot password?
+          </Link>
+        </div>
+
         <Button
-          variant="solid"
-          onClick={() => setCount(count => count + 1)}
+          variant="flat"
+          radius="full"
+          className="login-button h-[3.75rem] bg-[#363e4e] text-base font-medium text-[#fff] hover:bg-[#2f3640]"
         >
-          count is {count}
+          Log in
         </Button>
-        <p className="mt-24 border-2 p-4">
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+
+        <Link
+          className="justify-center text-sm text-[#5ebeff]"
+          underline="hover"
+          href="https://www.easygenerator.com/en/eula/"
+        >
+          End User License Agreement (EULA)
+        </Link>
       </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-    </>
+
+      <div className="flex flex-row items-center justify-center gap-2">
+        <Image src="/lock.svg" />
+        <p className="text-center text-sm text-[#c3cad7]">Easygenerator stores your data in the European Union</p>
+      </div>
+    </div>
   );
 }
 
