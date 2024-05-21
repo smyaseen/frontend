@@ -8,7 +8,7 @@ pattern='^(build|fix|chore|feat|docs|refactor|perf|test): .+$'
 if [[ ! $commit_message =~ $pattern ]]; then
     echo "\nInvalid commit message: $commit_message"
     echo "-"
-    echo "Should follow this pattern: build|fix|style|chore|feat|docs|refactor|perf|test: objective"
+    echo "Should follow this pattern: build|fix|chore|feat|docs|refactor|perf|test: objective"
     echo "-"
     echo "example: chore: updated .gitignore"
     echo "-"
@@ -29,12 +29,12 @@ if [[ ! $commit_message =~ $pattern ]]; then
     echo "perf: A code that improves performance style: A code that is related to styling."
     echo "-"
     echo "test: Adding new test or making changes to existing test"
-    echo "-"
-    echo "style: Changes to style of the code that do not affect the logic of the code"
     echo "-\n"
   exit 1
 fi
 
 npx lint-staged
-npm run test 
+# Uncomment below line when tests are added
+# npm run test 
+npm run build
 
