@@ -1,28 +1,86 @@
+const fs = require('fs');
+
 module.exports = {
   root: true,
   parserOptions: {
-    ecmaVersion: "latest",
-    sourceType: "module",
-    project: ["./tsconfig.json", "./tsconfig.node.json"],
+    ecmaVersion: 'latest',
+    sourceType: 'module',
+    project: ['./tsconfig.json', './tsconfig.node.json'],
     tsconfigRootDir: __dirname,
   },
   env: { browser: true, es2020: true },
   extends: [
-    "eslint:recommended",
-    "plugin:@typescript-eslint/recommended-type-checked",
-    "plugin:react-hooks/recommended",
-    "plugin:@typescript-eslint/stylistic-type-checked",
-    "plugin:react/recommended",
-    "plugin:react/jsx-runtime",
-    "prettier"
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended-type-checked',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/stylistic-type-checked',
+    'plugin:react/recommended',
+    'plugin:react/jsx-runtime',
+    'prettier',
   ],
-  ignorePatterns: ["dist", ".eslintrc.cjs"],
-  parser: "@typescript-eslint/parser",
-  plugins: ["react-refresh", 'prettier'],
+  ignorePatterns: ['dist', '.eslintrc.cjs'],
+  parser: '@typescript-eslint/parser',
+  plugins: ['react-refresh', 'prettier', 'import'],
   rules: {
-    "react-refresh/only-export-components": [
-      "warn",
-      { allowConstantExport: true },
+    'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
+    'tailwindcss/no-custom-classname': 'off',
+    'testing-library/prefer-screen-queries': 'off',
+    '@next/next/no-html-link-for-pages': 'off',
+    '@typescript-eslint/no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+      },
+    ],
+    'sort-imports': [
+      'error',
+      {
+        ignoreCase: true,
+        ignoreDeclarationSort: true,
+      },
+    ],
+    'tailwindcss/classnames-order': 'off',
+    'import/order': [
+      1,
+      {
+        groups: ['external', 'builtin', 'internal', 'sibling', 'parent', 'index'],
+        pathGroups: [
+          ...getDirectoriesToSort().map(singleDir => ({
+            pattern: `${singleDir}/**`,
+            group: 'internal',
+          })),
+          {
+            pattern: 'env',
+            group: 'internal',
+          },
+          {
+            pattern: 'theme',
+            group: 'internal',
+          },
+          {
+            pattern: 'public/**',
+            group: 'internal',
+            position: 'after',
+          },
+        ],
+        pathGroupsExcludedImportTypes: ['internal'],
+        alphabetize: {
+          order: 'asc',
+          caseInsensitive: true,
+        },
+      },
     ],
   },
 };
+
+function getDirectoriesToSort() {
+  const ignoredSortingDirectories = ['.git', '.vscode', 'node_modules'];
+  return getDirectories(process.cwd()).filter(f => !ignoredSortingDirectories.includes(f));
+}
+
+function getDirectories(path) {
+  return fs.readdirSync(path).filter(function (file) {
+    return fs.statSync(path + '/' + file).isDirectory();
+  });
+}

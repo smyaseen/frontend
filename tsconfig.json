@@ -26,6 +26,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["src", "./jest.setup.ts", "./jest.config.ts", "./prettier.config.cjs"],
+  "include": ["src", "./jest.setup.ts", "./jest.config.ts", "./prettier.config.cjs", "./env.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
