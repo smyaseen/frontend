@@ -2,9 +2,8 @@ import { createEnv } from '@t3-oss/env-core';
 // import { z } from 'zod';
 
 export const env = createEnv({
-  server: {
-    // DATABASE_URL: z.string().url(),
-    // OPEN_AI_API_KEY: z.string().min(1),
+  client: {
+    // VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
   },
 
   /**
@@ -12,16 +11,6 @@ export const env = createEnv({
    * a type-level and at runtime.
    */
   clientPrefix: 'VITE_',
-
-  client: {
-    // VITE_CLERK_PUBLISHABLE_KEY: z.string().min(1),
-  },
-
-  /**
-   * What object holds the environment variables at runtime. This is usually
-   * `process.env` or `import.meta.env`.
-   */
-  runtimeEnv: import.meta.env,
 
   /**
    * By default, this library will feed the environment variables directly to
@@ -37,4 +26,15 @@ export const env = createEnv({
    * explicitly specify this option as true.
    */
   emptyStringAsUndefined: true,
+
+  /**
+   * What object holds the environment variables at runtime. This is usually
+   * `process.env` or `import.meta.env`.
+   */
+  runtimeEnv: import.meta.env,
+
+  server: {
+    // DATABASE_URL: z.string().url(),
+    // OPEN_AI_API_KEY: z.string().min(1),
+  },
 });
