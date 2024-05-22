@@ -2,15 +2,15 @@ import './style.css';
 import { Button, Checkbox, Image, Input, Link } from '@nextui-org/react';
 import { useEffect } from 'react';
 
-const LoginPage = () => {
+const SignUpPage = () => {
   useEffect(() => {
-    document.title = 'Sign In';
+    document.title = 'Sign Up';
   }, []);
 
   return (
     <div className="animate-fade-down flex flex-col gap-14">
       <div className="flex w-full max-w-96 flex-col justify-center gap-6">
-        <p className="text-center text-[2rem] font-semibold">Welcome Back</p>
+        <p className="text-center text-[2rem] font-semibold">Start creating courses now</p>
 
         <div className="flex flex-col gap-4">
           <Input
@@ -72,4 +72,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignUpPage;
