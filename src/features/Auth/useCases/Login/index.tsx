@@ -1,74 +1,59 @@
-import './style.css';
-import { Button, Checkbox, Image, Input, Link } from '@nextui-org/react';
 import { useEffect } from 'react';
+import AuthEmailInput from '../../components/AuthEmailInput';
+import AuthForm from '../../components/AuthForm';
+import AuthPasswordInput from '../../components/AuthPasswordInput';
+import useInputState from '../../hooks/useInputState';
 
 const LoginPage = () => {
+  const {
+    handleBlur: handleEmailBlur,
+    handleChange: handleEmailChange,
+    handleFocus: handleEmailFocus,
+    isValid: isEmailValid,
+    text: emailText,
+  } = useInputState({ validateOnBlur: true, validationRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ });
+
+  const {
+    handleBlur: handlePasswordBlur,
+    handleChange: handlePasswordChange,
+    handleFocus: handlePasswordFocus,
+    isValid: isPasswordValid,
+    text: passwordText,
+  } = useInputState({
+    validateOnBlur: true,
+    validationRegex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
+  });
+
   useEffect(() => {
     document.title = 'Sign In';
   }, []);
 
+  const handleSubmit = () => {
+    // handle sign up...
+  };
+
   return (
-    <div className="flex animate-fade-down flex-col gap-14">
-      <div className="flex w-full max-w-96 flex-col justify-center gap-6">
-        <p className="text-center text-[2rem] font-semibold">Welcome Back</p>
+    <AuthForm
+      title="Welcome back"
+      buttonText="Log In"
+      onSubmit={handleSubmit}
+    >
+      <AuthEmailInput
+        isValid={isEmailValid}
+        onBlur={handleEmailBlur}
+        onChange={handleEmailChange}
+        onFocus={handleEmailFocus}
+        value={emailText}
+      />
 
-        <div className="flex flex-col gap-4">
-          <Input
-            variant="underlined"
-            label="Business Email"
-            // placeholder="name@yourcompany.com"
-            type="email"
-          />
-
-          <Input
-            variant="underlined"
-            label="Password"
-            type="password"
-          />
-        </div>
-
-        <div className="flex flex-row justify-between">
-          <Checkbox
-            radius="none"
-            defaultSelected
-            size="sm"
-            classNames={{
-              label: 'text-[#73899e]',
-            }}
-          >
-            Keep me logged in
-          </Checkbox>
-
-          <Link
-            underline="hover"
-            className="cursor-pointer text-sm text-[#73899e]"
-          >
-            Forgot password?
-          </Link>
-        </div>
-
-        <Button
-          variant="flat"
-          radius="full"
-          className="login-button h-[3.75rem] bg-[#363e4e] text-base font-medium text-[#fff] hover:bg-[#2f3640]"
-        >
-          Log in
-        </Button>
-
-        <Link
-          className="justify-center text-sm text-[#5ebeff]"
-          underline="hover"
-          href="https://www.easygenerator.com/en/eula/"
-        >
-          End User License Agreement (EULA)
-        </Link>
-      </div>
-
-      <div className="flex flex-row items-center justify-center gap-2">
-        <Image src="/lock.svg" />
-        <p className="text-center text-sm text-[#c3cad7]">Easygenerator stores your data in the European Union</p>
-      </div>
-    </div>
+      <AuthPasswordInput
+        isValid={isPasswordValid}
+        onBlur={handlePasswordBlur}
+        onChange={handlePasswordChange}
+        onFocus={handlePasswordFocus}
+        value={passwordText}
+      />
+    </AuthForm>
   );
 };
 
