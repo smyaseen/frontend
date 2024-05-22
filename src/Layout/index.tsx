@@ -1,42 +1,42 @@
-import { Button, Image } from '@nextui-org/react';
-import { Link, Outlet } from 'react-router-dom';
-import { useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
+import Roles from '@/config/routes/Roles';
+import routeConfig from '@/config/routes/RouteConfig';
+import AuthLayout from './AuthLayout';
 
 const GlobalLayout = () => {
+  const isLoggedIn = false;
+  const role = 'auth';
+
+  const navigate = useNavigate();
   const { pathname } = useLocation();
 
-  return (
-    <div className="flex flex-col items-center justify-center gap-14 px-4 pb-0 pt-10">
-      <div className="flex w-full flex-row justify-between">
-        <Image
-          src="/logo.svg"
-          alt="NextUI"
-          className="hidden sm:block"
-        />
-        <Image
-          src="/logo-sm.svg"
-          alt="NextUI"
-          className="block sm:hidden"
-        />
-        <div className="flex flex-row items-center gap-4">
-          <p className="hidden text-sm text-[#848fa3] sm:block">
-            {pathname === '/signin' ? 'Don’t have an account?' : 'Already have an account?'}
-          </p>
-          <Button
-            variant="bordered"
-            radius="full"
-            className="h-[2.6rem] w-[9.5rem] border-1 border-[#eaedf1] font-medium text-[#363e4e]"
-            as={Link}
-            to={pathname === '/signin' ? '/signup' : '/signin'}
-          >
-            {pathname === '/signin' ? 'Sign up' : 'Log in'}
-          </Button>
-        </div>
-      </div>
+  const [isValidRoute, setIsValidRoute] = useState(false);
 
-      <Outlet />
-    </div>
-  );
+  useEffect(() => {
+    if (isLoggedIn) {
+      if (!Roles[role]) {
+        //
+      } else if (!routeConfig[role]) {
+        console.error(`Unrecognized role: ${role}`);
+        // handle error...
+      } else if (!routeConfig[role][pathname]) {
+        setIsValidRoute(false);
+        navigate(routeConfig[role].default);
+      } else {
+        setIsValidRoute(true);
+      }
+    } else {
+      if (!routeConfig.auth[pathname] && pathname !== '/public-route') {
+        setIsValidRoute(false);
+        navigate(routeConfig.auth.default);
+      } else {
+        setIsValidRoute(true);
+      }
+    }
+  }, [isLoggedIn, role, navigate, pathname]);
+
+  return isValidRoute ? isLoggedIn ? <div>Private Layout</div> : <AuthLayout /> : null;
 };
 
 export default GlobalLayout;

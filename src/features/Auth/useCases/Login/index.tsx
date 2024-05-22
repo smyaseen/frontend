@@ -8,7 +8,7 @@ const LoginPage = () => {
   }, []);
 
   return (
-    <div className="animate-fade-down flex flex-col gap-14">
+    <div className="flex animate-fade-down flex-col gap-14">
       <div className="flex w-full max-w-96 flex-col justify-center gap-6">
         <p className="text-center text-[2rem] font-semibold">Welcome Back</p>
 
