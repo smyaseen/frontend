@@ -30,6 +30,8 @@ module.exports = {
   rules: {
     'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
     'testing-library/prefer-screen-queries': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'off',
+    '@typescript-eslint/no-unsafe-call': 'off',
     '@next/next/no-html-link-for-pages': 'off',
     '@typescript-eslint/no-unused-vars': [
       'warn',

@@ -1,42 +1,34 @@
 import { Input } from '@nextui-org/react';
 import { useEffect } from 'react';
-import AuthEmailInput from '../../components/AuthEmailInput';
-import AuthForm from '../../components/AuthForm';
-import AuthPasswordInput from '../../components/AuthPasswordInput';
-import useInputState from '../../hooks/useInputState';
+import AuthEmailInput from '@/features/Auth/components/AuthEmailInput';
+import AuthForm from '@/features/Auth/components/AuthForm';
+import AuthPasswordInput from '@/features/Auth/components/AuthPasswordInput';
+import { useSignUpFunctional } from './SignUpFunctional';
 
 const SignUpPage = () => {
   useEffect(() => {
     document.title = 'Sign Up';
   }, []);
 
-  const handleSubmit = () => {
-    // handle sign up...
-  };
   const {
-    handleBlur: handleEmailBlur,
-    handleChange: handleEmailChange,
-    handleFocus: handleEmailFocus,
-    isValid: isEmailValid,
-    text: emailText,
-  } = useInputState({ validateOnBlur: true, validationRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ });
-
-  const {
-    handleBlur: handlePasswordBlur,
-    handleChange: handlePasswordChange,
-    handleFocus: handlePasswordFocus,
-    isValid: isPasswordValid,
-    text: passwordText,
-  } = useInputState({
-    validateOnBlur: true,
-    validationRegex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-  });
+    emailProps: { emailText, handleEmailBlur, handleEmailChange, handleEmailFocus, isEmailValid },
+    fullNameProps: { fullNameText, handleFullNameBlur, handleFullNameChange, handleFullNameFocus, isFullNameValid },
+    handleSubmit,
+    isError,
+    isLoading,
+    passwordProps: { handlePasswordBlur, handlePasswordChange, handlePasswordFocus, isPasswordValid, passwordText },
+  } = useSignUpFunctional();
 
   return (
     <AuthForm
       title="Start creating courses now"
       buttonText="Sign Up"
       onSubmit={handleSubmit}
+      isError={isError}
+      isLoading={isLoading}
+      isValid={
+        isEmailValid && isPasswordValid && isFullNameValid && emailText && passwordText && fullNameText ? true : false
+      }
     >
       <AuthEmailInput
         isValid={isEmailValid}
@@ -50,6 +42,10 @@ const SignUpPage = () => {
         variant="underlined"
         label="Full Name"
         type="text"
+        value={fullNameText}
+        onBlur={handleFullNameBlur}
+        onChange={handleFullNameChange}
+        onFocus={handleFullNameFocus}
         validate={val => {
           if (val.split(' ').length < 2) {
             return 'Full name should include your first and last names';

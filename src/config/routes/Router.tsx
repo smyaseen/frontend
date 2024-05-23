@@ -1,8 +1,8 @@
 import { createBrowserRouter } from 'react-router-dom';
-import LoginPage from '@/features/Auth/useCases/Login';
+import LoginPage from '@/features/Auth/Login/useCases/performLogin';
+import SignUpPage from '@/features/Auth/Sign Up/useCases/performSignUp';
 import GlobalLayout from '@/Layout';
 import NotFoundPage from '@/notfound-page';
-import SignUpPage from '../../features/Auth/useCases/Sign Up';
 
 const router = createBrowserRouter([
   {
