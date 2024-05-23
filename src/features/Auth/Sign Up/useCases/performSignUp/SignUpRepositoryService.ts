@@ -2,7 +2,8 @@ import { useMutation, UseMutationResult } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 import RouteNames from '@/config/routes/RouteNames';
 import { useUser } from '@/context/UserContext';
-import { storeUserAuthInfoInCookie } from '../../domain';
+import { parseJwt } from '@/Layout/domain';
+import { storeUserAuthInfoInCookie } from '../../../Login/domain';
 import { createSignUpApiAdapter, SignUpResponse } from './SignUpApiService';
 
 export function useSignUp(): UseMutationResult<
@@ -41,10 +42,19 @@ export function useSignUp(): UseMutationResult<
           role: userData?.user?.role ?? '',
         });
 
-        // store user auth info in cookie
+        const { exp: accessTokenExp } = parseJwt(userData?.tokens?.accessToken ?? '');
+        const { exp: refreshTokenExp } = parseJwt(userData?.tokens?.refreshToken ?? '');
 
-        storeUserAuthInfoInCookie(userData?.tokens?.accessToken ?? '', userData?.tokens?.refreshToken ?? '');
-
+        storeUserAuthInfoInCookie({
+          accessToken: {
+            exp: accessTokenExp,
+            value: userData?.tokens?.accessToken ?? '',
+          },
+          refreshToken: {
+            exp: refreshTokenExp,
+            value: userData?.tokens?.refreshToken ?? '',
+          },
+        });
         navigate(RouteNames.dashboard);
       }
     },
