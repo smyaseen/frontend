@@ -4,8 +4,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import Roles from '@/config/routes/Roles';
 import routeConfig from '@/config/routes/RouteConfig';
 import { IUser, useUser } from '@/context/UserContext';
-import DashboardPage from '@/features/Dashboard';
 import AuthLayout from './AuthLayout';
+import DashboardLayout from './DashboardLayout';
 import { performTokenValidation } from './domain';
 
 const GlobalLayout = () => {
@@ -34,8 +34,7 @@ const GlobalLayout = () => {
       if (!Roles[user.role]) {
         //
       } else if (!routeConfig[user.role]) {
-        console.error(`Unrecognized role: ${user.role}`);
-        // handle error...
+        //
       } else if (!routeConfig[user.role][pathname]) {
         setIsValidRoute(false);
         navigate(routeConfig[user.role].default);
@@ -58,7 +57,7 @@ const GlobalLayout = () => {
     </div>
   ) : isValidRoute ? (
     user?.name ? (
-      <DashboardPage />
+      <DashboardLayout />
     ) : (
       <AuthLayout />
     )

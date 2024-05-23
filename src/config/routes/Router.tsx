@@ -1,4 +1,5 @@
 import { createBrowserRouter } from 'react-router-dom';
+import ErrorPage from '@/error-page';
 import LoginPage from '@/features/Auth/Login/useCases/performLogin';
 import SignUpPage from '@/features/Auth/Sign Up/useCases/performSignUp';
 import DashboardPage from '@/features/Dashboard';
@@ -21,9 +22,13 @@ const router = createBrowserRouter([
         element: <DashboardPage />,
         path: RouteNames.dashboard,
       },
+      {
+        element: <NotFoundPage />,
+        path: '*',
+      },
     ],
     element: <GlobalLayout />,
-    errorElement: <NotFoundPage />,
+    errorElement: <ErrorPage />,
     path: '/',
   },
 ]);
