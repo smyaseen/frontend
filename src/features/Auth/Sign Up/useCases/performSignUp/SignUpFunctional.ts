@@ -36,7 +36,7 @@ export function useSignUpFunctional() {
 
   const handleSubmit = () => {
     if (isEmailValid && isPasswordValid) {
-      mutate({ email: emailText, fullName: fullNameText, password: passwordText });
+      mutate({ email: emailText, name: fullNameText, password: passwordText });
     }
   };
 

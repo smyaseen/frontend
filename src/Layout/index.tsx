@@ -2,11 +2,13 @@ import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import Roles from '@/config/routes/Roles';
 import routeConfig from '@/config/routes/RouteConfig';
+import { useUser } from '@/context/UserContext';
+import DashboardPage from '@/features/Dashboard';
 import AuthLayout from './AuthLayout';
+import { getDecodedAccessToken } from './domain';
 
 const GlobalLayout = () => {
-  const isLoggedIn = false;
-  const role = 'auth';
+  const { setUser, user } = useUser();
 
   const navigate = useNavigate();
   const { pathname } = useLocation();
@@ -14,15 +16,25 @@ const GlobalLayout = () => {
   const [isValidRoute, setIsValidRoute] = useState(false);
 
   useEffect(() => {
-    if (isLoggedIn) {
-      if (!Roles[role]) {
+    const userAuthInfo = getDecodedAccessToken();
+    if (userAuthInfo) {
+      setUser(userAuthInfo);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    console.log('🚀 ~ useEffect ~ user:', user);
+
+    if (user?.name && user?.role) {
+      if (!Roles[user.role]) {
         //
-      } else if (!routeConfig[role]) {
-        console.error(`Unrecognized role: ${role}`);
+      } else if (!routeConfig[user.role]) {
+        console.error(`Unrecognized role: ${user.role}`);
         // handle error...
-      } else if (!routeConfig[role][pathname]) {
+      } else if (!routeConfig[user.role][pathname]) {
         setIsValidRoute(false);
-        navigate(routeConfig[role].default);
+        navigate(routeConfig[user.role].default);
       } else {
         setIsValidRoute(true);
       }
@@ -34,9 +46,9 @@ const GlobalLayout = () => {
         setIsValidRoute(true);
       }
     }
-  }, [isLoggedIn, role, navigate, pathname]);
+  }, [user?.name, user?.role, navigate, pathname, user]);
 
-  return isValidRoute ? isLoggedIn ? <div>Private Layout</div> : <AuthLayout /> : null;
+  return isValidRoute ? user?.name ? <DashboardPage /> : <AuthLayout /> : null;
 };
 
 export default GlobalLayout;

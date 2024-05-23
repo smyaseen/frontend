@@ -1,8 +1,24 @@
-const apiUrl = import.meta.env.VITE_API_URL;
+// const apiUrl = import.meta.env.VITE_API_URL;
+
+interface Tokens {
+  accessToken: string;
+  refreshToken: string;
+}
+
+interface User {
+  name: string;
+  role: string;
+}
+
+interface Data {
+  tokens?: Tokens;
+  user?: User;
+}
 
 export interface SignUpResponse {
-  email: string;
-  token: string;
+  success: boolean;
+  message: string;
+  data?: Data;
 }
 
 interface AdapterOptions {
@@ -10,13 +26,15 @@ interface AdapterOptions {
 }
 
 export function createSignUpApiAdapter(
-  { email, fullName, password }: { email: string; fullName: string; password: string },
+  { email, name, password }: { email: string; name: string; password: string },
   { request = window.fetch }: AdapterOptions = {}
 ): () => Promise<SignUpResponse> {
   return async (): Promise<SignUpResponse> => {
-    const response = await request(`${apiUrl}/auth`, {
-      body: JSON.stringify({ email, fullName, password }),
-      headers: { 'Content-Type': 'application/json' },
+    const response = await request(`http://localhost:3000/auth/register`, {
+      body: JSON.stringify({ email, name, password }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
     });
     const result = (await response.json()) as SignUpResponse;

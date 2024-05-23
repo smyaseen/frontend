@@ -1,4 +1,5 @@
 // import Roles from './Roles';
+import Roles from './Roles';
 import RouteNames from './RouteNames';
 
 const routeConfig: Record<
@@ -8,7 +9,10 @@ const routeConfig: Record<
     default: string;
   }
 > = {
-  //   [Roles.customer]: {},
+  [Roles.customer]: {
+    [RouteNames.dashboard]: RouteNames.dashboard,
+    default: RouteNames.dashboard,
+  },
   auth: {
     [RouteNames.signin]: RouteNames.signin,
     [RouteNames.signup]: RouteNames.signup,
