@@ -12,6 +12,14 @@ interface UserContextType {
   setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
+export const initialUserState: IUser = {
+  accessToken: null,
+  name: null,
+  refreshToken: null,
+  role: null,
+};
+
 const UserContext = createContext<UserContextType | undefined>(undefined);
 
 export const UserProvider: React.FC<{ children: ReactNode }> = ({ children }) => {

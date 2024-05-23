@@ -8,16 +8,18 @@ const AuthLayout = () => {
   return (
     <div className="flex flex-col items-center justify-center gap-14 px-4 pb-0 pt-10">
       <div className="flex w-full flex-row justify-between">
-        <Image
-          src="/logo.svg"
-          alt="NextUI"
-          className="hidden sm:block"
-        />
-        <Image
-          src="/logo-sm.svg"
-          alt="NextUI"
-          className="block sm:hidden"
-        />
+        <div>
+          <Image
+            src="/logo.svg"
+            alt="NextUI"
+            className="hidden sm:block"
+          />
+          <Image
+            src="/logo-sm.svg"
+            alt="NextUI"
+            className="block sm:hidden"
+          />
+        </div>
         <div className="flex flex-row items-center gap-4">
           <p className="hidden text-sm text-[#848fa3] sm:block">
             {pathname === '/signin' ? 'Don’t have an account?' : 'Already have an account?'}
