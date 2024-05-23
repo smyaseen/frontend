@@ -25,6 +25,7 @@ const LoginPage = () => {
         isError={isError}
         isLoading={isLoading}
         isValid={isEmailValid && isPasswordValid && emailText && passwordText ? true : false}
+        type="signin"
       >
         <AuthEmailInput
           isValid={isEmailValid}

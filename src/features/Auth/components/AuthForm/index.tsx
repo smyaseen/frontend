@@ -9,9 +9,10 @@ interface IAuthForm {
   isError?: boolean;
   isLoading?: boolean;
   isValid?: boolean;
+  type: 'signin' | 'signup';
 }
 
-const AuthForm = ({ buttonText, children, isLoading, isValid, onSubmit, title }: IAuthForm) => (
+const AuthForm = ({ buttonText, children, isLoading, isValid, onSubmit, title, type }: IAuthForm) => (
   <div className="flex animate-fade-down flex-col gap-14">
     <div className="flex w-full max-w-96 flex-col justify-center gap-6">
       <p className="text-center text-[2rem] font-semibold">{title}</p>
@@ -21,7 +22,7 @@ const AuthForm = ({ buttonText, children, isLoading, isValid, onSubmit, title }:
       <Button
         variant="flat"
         radius="full"
-        className="login-button h-[3.75rem] bg-[#363e4e] text-base font-medium text-[#fff] hover:bg-[#2f3640]"
+        className={`${type === 'signin' ? 'login-button' : 'sign-up-button'} h-[3.75rem]  text-base font-medium text-[#fff]`}
         onClick={onSubmit}
         // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing
         isDisabled={isLoading || !isValid}

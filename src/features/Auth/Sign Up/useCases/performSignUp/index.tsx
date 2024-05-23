@@ -29,6 +29,7 @@ const SignUpPage = () => {
         isValid={
           isEmailValid && isPasswordValid && isFullNameValid && emailText && passwordText && fullNameText ? true : false
         }
+        type="signup"
       >
         <AuthEmailInput
           isValid={isEmailValid}
@@ -47,7 +48,7 @@ const SignUpPage = () => {
           onChange={handleFullNameChange}
           onFocus={handleFullNameFocus}
           validate={val => {
-            if (val.split(' ').length < 2) {
+            if (val.trim().split(' ').length < 2) {
               return 'Full name should include your first and last names';
             }
 

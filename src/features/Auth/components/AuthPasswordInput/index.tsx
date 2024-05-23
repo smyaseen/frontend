@@ -28,11 +28,11 @@ const AuthPasswordInput: React.FC<IAuthPasswordInput> = ({ isValid, ...props }: 
         if (value.length < 8)
           return 'Please lengthen this text to 8 characters or more (you are currently using 3 characters)';
 
-        if (!/(?=.*[A-Z])/.test(value)) return 'Password must contain at least one uppercase letter';
-
         if (!/(?=.*[a-z])/.test(value)) return 'Password must contain at least one lowercase letter';
 
         if (!/(?=.*\d)/.test(value)) return 'Password must contain at least one number';
+
+        if (!/(?=.*[@$!%*?&])/.test(value)) return 'Password must contain at least one special character';
 
         return '';
       }}
