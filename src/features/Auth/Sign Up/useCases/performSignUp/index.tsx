@@ -1,15 +1,11 @@
 import { Input } from '@nextui-org/react';
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import AuthEmailInput from '@/features/Auth/components/AuthEmailInput';
 import AuthForm from '@/features/Auth/components/AuthForm';
 import AuthPasswordInput from '@/features/Auth/components/AuthPasswordInput';
 import { useSignUpFunctional } from './SignUpFunctional';
 
 const SignUpPage = () => {
-  useEffect(() => {
-    document.title = 'Sign Up';
-  }, []);
-
   const {
     emailProps: { emailText, handleEmailBlur, handleEmailChange, handleEmailFocus, isEmailValid },
     fullNameProps: { fullNameText, handleFullNameBlur, handleFullNameChange, handleFullNameFocus, isFullNameValid },
@@ -20,49 +16,54 @@ const SignUpPage = () => {
   } = useSignUpFunctional();
 
   return (
-    <AuthForm
-      title="Start creating courses now"
-      buttonText="Sign Up"
-      onSubmit={handleSubmit}
-      isError={isError}
-      isLoading={isLoading}
-      isValid={
-        isEmailValid && isPasswordValid && isFullNameValid && emailText && passwordText && fullNameText ? true : false
-      }
-    >
-      <AuthEmailInput
-        isValid={isEmailValid}
-        onBlur={handleEmailBlur}
-        onChange={handleEmailChange}
-        onFocus={handleEmailFocus}
-        value={emailText}
-      />
+    <>
+      <Helmet>
+        <title>Sign Up</title>
+      </Helmet>
+      <AuthForm
+        title="Start creating courses now"
+        buttonText="Sign Up"
+        onSubmit={handleSubmit}
+        isError={isError}
+        isLoading={isLoading}
+        isValid={
+          isEmailValid && isPasswordValid && isFullNameValid && emailText && passwordText && fullNameText ? true : false
+        }
+      >
+        <AuthEmailInput
+          isValid={isEmailValid}
+          onBlur={handleEmailBlur}
+          onChange={handleEmailChange}
+          onFocus={handleEmailFocus}
+          value={emailText}
+        />
 
-      <Input
-        variant="underlined"
-        label="Full Name"
-        type="text"
-        value={fullNameText}
-        onBlur={handleFullNameBlur}
-        onChange={handleFullNameChange}
-        onFocus={handleFullNameFocus}
-        validate={val => {
-          if (val.split(' ').length < 2) {
-            return 'Full name should include your first and last names';
-          }
+        <Input
+          variant="underlined"
+          label="Full Name"
+          type="text"
+          value={fullNameText}
+          onBlur={handleFullNameBlur}
+          onChange={handleFullNameChange}
+          onFocus={handleFullNameFocus}
+          validate={val => {
+            if (val.split(' ').length < 2) {
+              return 'Full name should include your first and last names';
+            }
 
-          return '';
-        }}
-      />
+            return '';
+          }}
+        />
 
-      <AuthPasswordInput
-        isValid={isPasswordValid}
-        onBlur={handlePasswordBlur}
-        onChange={handlePasswordChange}
-        onFocus={handlePasswordFocus}
-        value={passwordText}
-      />
-    </AuthForm>
+        <AuthPasswordInput
+          isValid={isPasswordValid}
+          onBlur={handlePasswordBlur}
+          onChange={handlePasswordChange}
+          onFocus={handlePasswordFocus}
+          value={passwordText}
+        />
+      </AuthForm>
+    </>
   );
 };
 

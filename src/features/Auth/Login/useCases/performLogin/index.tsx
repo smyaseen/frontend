@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { Helmet } from 'react-helmet';
 import AuthEmailInput from '@/features/Auth/components/AuthEmailInput';
 import AuthForm from '@/features/Auth/components/AuthForm';
 import AuthPasswordInput from '@/features/Auth/components/AuthPasswordInput';
@@ -13,35 +13,36 @@ const LoginPage = () => {
     passwordProps: { handlePasswordBlur, handlePasswordChange, handlePasswordFocus, isPasswordValid, passwordText },
   } = useLoginFunctional();
 
-  useEffect(() => {
-    document.title = 'Sign In';
-  }, []);
-
   return (
-    <AuthForm
-      title="Welcome back"
-      buttonText="Log In"
-      onSubmit={handleSubmit}
-      isError={isError}
-      isLoading={isLoading}
-      isValid={isEmailValid && isPasswordValid && emailText && passwordText ? true : false}
-    >
-      <AuthEmailInput
-        isValid={isEmailValid}
-        onBlur={handleEmailBlur}
-        onChange={handleEmailChange}
-        onFocus={handleEmailFocus}
-        value={emailText}
-      />
+    <>
+      <Helmet>
+        <title>Sign In</title>
+      </Helmet>
+      <AuthForm
+        title="Welcome back"
+        buttonText="Log In"
+        onSubmit={handleSubmit}
+        isError={isError}
+        isLoading={isLoading}
+        isValid={isEmailValid && isPasswordValid && emailText && passwordText ? true : false}
+      >
+        <AuthEmailInput
+          isValid={isEmailValid}
+          onBlur={handleEmailBlur}
+          onChange={handleEmailChange}
+          onFocus={handleEmailFocus}
+          value={emailText}
+        />
 
-      <AuthPasswordInput
-        isValid={isPasswordValid}
-        onBlur={handlePasswordBlur}
-        onChange={handlePasswordChange}
-        onFocus={handlePasswordFocus}
-        value={passwordText}
-      />
-    </AuthForm>
+        <AuthPasswordInput
+          isValid={isPasswordValid}
+          onBlur={handlePasswordBlur}
+          onChange={handlePasswordChange}
+          onFocus={handlePasswordFocus}
+          value={passwordText}
+        />
+      </AuthForm>
+    </>
   );
 };
 
