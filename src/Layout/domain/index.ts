@@ -4,6 +4,8 @@ import { storeUserAuthInfoInCookie } from '@/features/Auth/Login/domain';
 import { LoginResponse } from '@/features/Auth/Login/useCases/performLogin/LoginApiService';
 import { IToken, TOKEN_ENUM } from '@/types';
 
+const apiUrl = import.meta.env.VITE_API_URL;
+
 export const parseJwt = (token: string): { username: string; role: string; exp: number } => {
   const base64Url = token.split('.')[1];
   const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
@@ -47,7 +49,7 @@ const performTokenRefresh = async (): Promise<IUser | void> => {
       return;
     }
 
-    const response = await fetch('http://localhost:3000/auth/refresh', {
+    const response = await fetch(`${apiUrl}/auth/refresh`, {
       body: JSON.stringify({ refreshToken }),
       headers: {
         'Content-Type': 'application/json',

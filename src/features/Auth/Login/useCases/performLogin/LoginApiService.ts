@@ -1,4 +1,4 @@
-// const apiUrl = import.meta.env.VITE_API_URL;
+const apiUrl = import.meta.env.VITE_API_URL;
 
 interface Tokens {
   accessToken: string;
@@ -31,7 +31,7 @@ export function createLoginApiAdapter(
   { request = window.fetch }: AdapterOptions = {}
 ): () => Promise<LoginResponse> {
   return async (): Promise<LoginResponse> => {
-    const response = await request(`http://localhost:3000/auth/login`, {
+    const response = await request(`${apiUrl}/auth/login`, {
       body: JSON.stringify({ email, password }),
       headers: { 'Content-Type': 'application/json' },
       method: 'POST',
