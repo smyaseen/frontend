@@ -8,6 +8,7 @@ A React Frontend App with Login, Signup feature, with latest technology, tools, 
 
 ## Features
 
+- **[Clean Code Architecture]** - broken down code into Api, Repository, Service, and View layer
 - **[JWT]** - JWT Login, and Refresh Token setup
 - **[Tailwind CSS & NextUI]** - A utility-first CSS framework for rapid UI development
 - **[ESlint]** and **[Prettier]** - For clean, consistent, and error-free code
