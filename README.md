@@ -30,21 +30,27 @@ To get started with this app, follow these steps:
 git clone https://github.com/smyaseen/frontend.git
 ```
 
-2. Install the dependencies:
+2. Add ENV variables
+
+```bash
+VITE_API_URL="http://localhost:3000"
+```
+
+3. Install the dependencies:
 
 ```bash
 npm install
 ```
 
-3. Run the development server:
+4. Run the development server:
 
 ```bash
 npm run dev
 ```
 
-4. Open [http://localhost:5137](http://localhost:5137) with your browser to see the result.
+5. Open [http://localhost:5137](http://localhost:5137) with your browser to see the result.
 
-5. This project uses a git hook to enforce. To install the git hook, run the following command in the root directory of the project:
+6. This project uses a git hook to enforce. To install the git hook, run the following command in the root directory of the project:
 
 ```sh
 npm run prepare
