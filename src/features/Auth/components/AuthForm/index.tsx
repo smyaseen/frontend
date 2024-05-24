@@ -35,7 +35,11 @@ const AuthForm = ({ buttonText, children, error, isError, isLoading, isValid, on
 
       {isError && error && (
         <p className="text-center text-sm text-[#ff4d4f]">
-          {error.status === 401 ? 'Invalid email or password' : 'Something went wrong, please try again later.'}
+          {error.status === 401
+            ? 'Invalid email or password'
+            : error.status === 400 && type === 'signup'
+              ? 'User Already Exists!'
+              : 'Something went wrong, please try again later.'}
         </p>
       )}
 
