@@ -33,7 +33,9 @@ export function createLoginApiAdapter(
   return async (): Promise<LoginResponse> => {
     const response = await request(`${VITE_API_URL}/auth/login`, {
       body: JSON.stringify({ email, password }),
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+      },
       method: 'POST',
     });
     const result = (await response.json()) as LoginResponse;

@@ -2,11 +2,12 @@ import { Helmet } from 'react-helmet';
 import AuthEmailInput from '@/features/Auth/components/AuthEmailInput';
 import AuthForm from '@/features/Auth/components/AuthForm';
 import AuthPasswordInput from '@/features/Auth/components/AuthPasswordInput';
-import { useLoginFunctional } from './LoginFunctional';
+import { useLoginFunctional } from './login.functional.service';
 
 const LoginPage = () => {
   const {
     emailProps: { emailText, handleEmailBlur, handleEmailChange, handleEmailFocus, isEmailValid },
+    error,
     handleSubmit,
     isError,
     isLoading,
@@ -23,6 +24,7 @@ const LoginPage = () => {
         buttonText="Log In"
         onSubmit={handleSubmit}
         isError={isError}
+        error={error}
         isLoading={isLoading}
         isValid={isEmailValid && isPasswordValid && emailText && passwordText ? true : false}
         type="signin"

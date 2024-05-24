@@ -10,9 +10,10 @@ interface IAuthForm {
   isLoading?: boolean;
   isValid?: boolean;
   type: 'signin' | 'signup';
+  error: { status: number; success: boolean } | null;
 }
 
-const AuthForm = ({ buttonText, children, isLoading, isValid, onSubmit, title, type }: IAuthForm) => (
+const AuthForm = ({ buttonText, children, error, isError, isLoading, isValid, onSubmit, title, type }: IAuthForm) => (
   <div className="flex animate-fade-down flex-col gap-14">
     <div className="flex w-full max-w-96 flex-col justify-center gap-6">
       <p className="text-center text-[2rem] font-semibold">{title}</p>
@@ -31,6 +32,12 @@ const AuthForm = ({ buttonText, children, isLoading, isValid, onSubmit, title, t
       >
         {buttonText}
       </Button>
+
+      {isError && error && (
+        <p className="text-center text-sm text-[#ff4d4f]">
+          {error.status === 401 ? 'Invalid email or password' : 'Something went wrong, please try again later.'}
+        </p>
+      )}
 
       <Link
         className="justify-center text-sm text-[#5ebeff]"

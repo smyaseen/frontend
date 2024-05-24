@@ -3,11 +3,12 @@ import { Helmet } from 'react-helmet';
 import AuthEmailInput from '@/features/Auth/components/AuthEmailInput';
 import AuthForm from '@/features/Auth/components/AuthForm';
 import AuthPasswordInput from '@/features/Auth/components/AuthPasswordInput';
-import { useSignUpFunctional } from './SignUpFunctional';
+import { useSignUpFunctional } from './signup.functional.service';
 
 const SignUpPage = () => {
   const {
     emailProps: { emailText, handleEmailBlur, handleEmailChange, handleEmailFocus, isEmailValid },
+    error,
     fullNameProps: { fullNameText, handleFullNameBlur, handleFullNameChange, handleFullNameFocus, isFullNameValid },
     handleSubmit,
     isError,
@@ -25,6 +26,7 @@ const SignUpPage = () => {
         buttonText="Sign Up"
         onSubmit={handleSubmit}
         isError={isError}
+        error={error}
         isLoading={isLoading}
         isValid={
           isEmailValid && isPasswordValid && isFullNameValid && emailText && passwordText && fullNameText ? true : false

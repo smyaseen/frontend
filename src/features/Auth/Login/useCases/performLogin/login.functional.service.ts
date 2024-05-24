@@ -1,5 +1,5 @@
 import useInputState from '@/features/Auth/hooks/useInputState';
-import { useLogin } from './LoginRepositoryService';
+import { useLogin } from './login.repository.service';
 
 export function useLoginFunctional() {
   const {
@@ -22,7 +22,7 @@ export function useLoginFunctional() {
     validationRegex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
   });
 
-  const { isError, isPending, mutate } = useLogin();
+  const { error, isError, isPending, mutate } = useLogin();
 
   const handleSubmit = () => {
     if (isEmailValid && isPasswordValid) {
@@ -38,6 +38,7 @@ export function useLoginFunctional() {
       handleEmailFocus,
       isEmailValid,
     },
+    error: error as { status: number; success: boolean } | null,
     handleSubmit,
     isError,
     isLoading: isPending,

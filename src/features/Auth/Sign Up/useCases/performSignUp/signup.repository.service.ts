@@ -4,14 +4,15 @@ import RouteNames from '@/config/routes/RouteNames';
 import { useUser } from '@/context/UserContext';
 import { parseJwt } from '@/Layout/domain';
 import { storeUserAuthInfoInCookie } from '../../../domain';
-import { createLoginApiAdapter, LoginResponse } from './LoginApiService';
+import { createSignUpApiAdapter, SignUpResponse } from './signup.api.service';
 
-export function useLogin(): UseMutationResult<
-  LoginResponse,
+export function useSignUp(): UseMutationResult<
+  SignUpResponse,
   Error,
   {
     email: string;
     password: string;
+    name: string;
   },
   unknown
 > {
@@ -19,8 +20,16 @@ export function useLogin(): UseMutationResult<
   const navigate = useNavigate();
 
   const mutation = useMutation({
-    mutationFn: ({ email, password }: { email: string; password: string }): Promise<LoginResponse> => {
-      return createLoginApiAdapter(email, password)();
+    mutationFn: ({
+      email,
+      name,
+      password,
+    }: {
+      email: string;
+      password: string;
+      name: string;
+    }): Promise<SignUpResponse> => {
+      return createSignUpApiAdapter({ email, name, password })();
     },
     onSuccess(data) {
       if (data.data) {
@@ -46,7 +55,6 @@ export function useLogin(): UseMutationResult<
             value: userData?.tokens?.refreshToken ?? '',
           },
         });
-
         navigate(RouteNames.dashboard);
       }
     },
@@ -54,3 +62,5 @@ export function useLogin(): UseMutationResult<
 
   return mutation;
 }
+
+export default useSignUp;

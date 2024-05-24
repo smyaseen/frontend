@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { IUser } from '@/context/UserContext';
 import { storeUserAuthInfoInCookie } from '@/features/Auth/domain';
-import { LoginResponse } from '@/features/Auth/Login/useCases/performLogin/LoginApiService';
+import { LoginResponse } from '@/features/Auth/Login/useCases/performLogin/login.api.service';
 import { IToken, TOKEN_ENUM } from '@/types';
 import { VITE_API_URL } from '@/utils/constants';
 
