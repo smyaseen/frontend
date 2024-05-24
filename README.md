@@ -10,8 +10,8 @@ A React Frontend App with Login, Signup feature, with latest technology, tools, 
 
 - **[JWT]** - JWT Login, and Refresh Token setup
 - **[Tailwind CSS & NextUI]** - A utility-first CSS framework for rapid UI development
-- **[ESlint]** and **[Prettier](https://prettier.io/)** - For clean, consistent, and error-free code
-- **[Jest and RTL]** and **[React Testing Library](https://testing-library.com/react)** - For rock-solid unit tests
+- **[ESlint]** and **[Prettier]** - For clean, consistent, and error-free code
+- **[Jest and RTL]** and **[React Testing Library]** - For rock-solid unit tests
 - **[T3 Env]** - Manage your environment variables with ease
 - **[Husky]** - For Git Hooks, having auto commit check, lint-staged, and running tests on commit.
 - **[Lint-Staged]** - For linting and prettier
