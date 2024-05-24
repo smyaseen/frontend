@@ -40,6 +40,7 @@ const SignUpPage = () => {
         />
 
         <Input
+          data-testid="name"
           variant="underlined"
           label="Full Name"
           type="text"

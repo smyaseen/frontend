@@ -3,8 +3,7 @@ import { IUser } from '@/context/UserContext';
 import { storeUserAuthInfoInCookie } from '@/features/Auth/domain';
 import { LoginResponse } from '@/features/Auth/Login/useCases/performLogin/LoginApiService';
 import { IToken, TOKEN_ENUM } from '@/types';
-
-const apiUrl = import.meta.env.VITE_API_URL;
+import { VITE_API_URL } from '@/utils/constants';
 
 export const parseJwt = (token: string): { username: string; role: string; exp: number } => {
   const base64Url = token.split('.')[1];
@@ -49,7 +48,7 @@ const performTokenRefresh = async (): Promise<IUser | void> => {
       return;
     }
 
-    const response = await fetch(`${apiUrl}/auth/refresh`, {
+    const response = await fetch(`${VITE_API_URL}/auth/refresh`, {
       body: JSON.stringify({ refreshToken }),
       headers: {
         'Content-Type': 'application/json',

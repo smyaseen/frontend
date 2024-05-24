@@ -8,7 +8,11 @@ export function useSignUpFunctional() {
     handleFocus: handleEmailFocus,
     isValid: isEmailValid,
     text: emailText,
-  } = useInputState({ validateOnBlur: true, validationRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/ });
+  } = useInputState({
+    validateOnBlur: true,
+    validateOnChange: true,
+    validationRegex: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  });
 
   const {
     handleBlur: handlePasswordBlur,
@@ -18,6 +22,7 @@ export function useSignUpFunctional() {
     text: passwordText,
   } = useInputState({
     validateOnBlur: true,
+    validateOnChange: true,
     validationRegex: /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
   });
 
@@ -29,6 +34,7 @@ export function useSignUpFunctional() {
     text: fullNameText,
   } = useInputState({
     validateOnBlur: true,
+    validateOnChange: true,
     validationRegex: /^[a-zA-Z]+ [a-zA-Z]+$/,
   });
 

@@ -18,6 +18,7 @@ const AuthPasswordInput: React.FC<IAuthPasswordInput> = ({ isValid, ...props }: 
       classNames={{
         inputWrapper: `${!isValid && !props.value ? '!border-[#F26838]' : ''}`,
       }}
+      data-testid="password"
       variant="underlined"
       type={isPasswordVisible ? 'text' : 'password'}
       label="Password"

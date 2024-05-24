@@ -12,6 +12,7 @@ const AuthEmailInput: React.FC<IAuthEmailInput> = ({ isValid, ...props }: IAuthE
   <Input
     label="Business Email"
     type="email"
+    data-testid="email"
     classNames={{
       inputWrapper: `${!isValid ? '!border-[#F26838]' : ''}`,
     }}

@@ -22,6 +22,7 @@ const AuthForm = ({ buttonText, children, isLoading, isValid, onSubmit, title, t
       <Button
         variant="flat"
         radius="full"
+        data-testid="submit"
         className={`${type === 'signin' ? 'login-button' : 'sign-up-button'} h-[3.75rem]  text-base font-medium text-[#fff]`}
         onClick={onSubmit}
         // eslint-disable-next-line @typescript-eslint/prefer-nullish-coalescing

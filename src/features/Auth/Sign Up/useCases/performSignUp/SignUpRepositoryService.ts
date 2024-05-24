@@ -62,3 +62,5 @@ export function useSignUp(): UseMutationResult<
 
   return mutation;
 }
+
+export default useSignUp;
