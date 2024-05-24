@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import RouteNames from '@/config/routes/RouteNames';
 import { useUser } from '@/context/UserContext';
 import { parseJwt } from '@/Layout/domain';
-import { storeUserAuthInfoInCookie } from '../../domain';
+import { storeUserAuthInfoInCookie } from '../../../domain';
 import { createLoginApiAdapter, LoginResponse } from './LoginApiService';
 
 export function useLogin(): UseMutationResult<

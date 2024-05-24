@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie';
 import { IUser } from '@/context/UserContext';
-import { storeUserAuthInfoInCookie } from '@/features/Auth/Login/domain';
+import { storeUserAuthInfoInCookie } from '@/features/Auth/domain';
 import { LoginResponse } from '@/features/Auth/Login/useCases/performLogin/LoginApiService';
 import { IToken, TOKEN_ENUM } from '@/types';
 
